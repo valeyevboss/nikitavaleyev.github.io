@@ -276,16 +276,225 @@ body {
 .project-card h3 { font-size: 1.3rem; }
 .project-desc { color: var(--text-muted); font-size: 0.95rem; }
 
-.script-badge {
-    color: #2ed573;
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    margin-bottom: 8px;
+/* Script Card Layout */
+.script-card {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
 }
 
-.script-card h3 { font-size: 1.15rem; margin-bottom: 8px; }
-.script-card p { color: var(--text-muted); font-size: 0.9rem; }
+.script-header {
+    display: grid;
+    grid-template-columns: 48px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 10px;
+}
+
+.script-icon-box {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-md);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--card-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.script-logo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.script-heading {
+    min-width: 0;
+}
+
+.script-badge {
+    display: inline-block;
+    width: fit-content;
+    background: rgba(46, 213, 115, 0.14);
+    border: 1px solid rgba(46, 213, 115, 0.25);
+    color: #2ed573;
+    padding: 3px 9px;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    line-height: 1.2;
+    margin-bottom: 5px;
+}
+
+.script-card h3 {
+    font-size: 1.03rem;
+    letter-spacing: -0.2px;
+    white-space: nowrap;
+}
+
+.script-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    align-self: flex-start;
+    flex-shrink: 0;
+}
+
+.action-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 9px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.action-btn:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.08);
+}
+
+.action-btn:active {
+    transform: translateY(0);
+}
+
+/* ‘иолетовый градиент Ч —качать */
+.action-download {
+    background: linear-gradient(135deg, #8e44ad 0%, #6c5ce7 100%);
+    box-shadow: 0 4px 12px rgba(108, 92, 231, 0.35);
+}
+
+.action-download:hover {
+    box-shadow: 0 6px 16px rgba(108, 92, 231, 0.5);
+}
+
+/* ќранжевый градиент Ч ќбзор */
+.action-info {
+    background: linear-gradient(135deg, #ff7b00 0%, #ff9f1a 100%);
+    box-shadow: 0 4px 12px rgba(255, 123, 0, 0.35);
+}
+
+.action-info:hover {
+    box-shadow: 0 6px 16px rgba(255, 123, 0, 0.5);
+}
+
+.action-icon {
+    width: 15px;
+    height: 15px;
+    display: block;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+}
+
+.script-desc {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    line-height: 1.55;
+    margin: 0;
+}
+
+/* »нтерактивность самой иконки в карточке */
+.script-icon-box {
+    cursor: zoom-in;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.script-icon-box:hover {
+    transform: scale(1.07);
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.45);
+}
+
+/* ћодальное окно (Ћайтбокс) */
+.logo-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(8, 9, 12, 0.85);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.logo-modal.is-open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.logo-modal-content {
+    position: relative;
+    background: var(--bg-card);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.75);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    transform: scale(0.92);
+    transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.logo-modal.is-open .logo-modal-content {
+    transform: scale(1);
+}
+
+.logo-modal-img {
+    width: 240px;
+    height: 240px;
+    max-width: 75vw;
+    max-height: 75vw;
+    object-fit: contain;
+    border-radius: var(--radius-md);
+    display: block;
+}
+
+.logo-modal-caption {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-main);
+    text-align: center;
+}
+
+/*  рестик в правом верхнем углу */
+.logo-modal-close {
+    position: absolute;
+    top: -14px;
+    right: -14px;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: #232732;
+    color: var(--text-main);
+    font-size: 1.35rem;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.logo-modal-close:hover {
+    background: #ff4757;
+    border-color: #ff4757;
+    color: #fff;
+    transform: scale(1.08);
+}
 
 /* Footer */
 .footer {
