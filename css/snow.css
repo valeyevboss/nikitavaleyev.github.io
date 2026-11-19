@@ -1,0 +1,45 @@
+/* Контейнер для падающего снега */
+.snow-layer {
+    position: fixed;
+    inset: 0;
+    z-index: 90; /* Ниже шапки (100) и модального окна (1000), но поверх фона */
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.snowflake {
+    position: absolute;
+    top: -20px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #ffffff 0%, rgba(226, 240, 255, 0.85) 70%, rgba(255, 255, 255, 0) 100%);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.45);
+    will-change: transform;
+    animation-name: snow-fall, snow-sway;
+    animation-timing-function: linear, ease-in-out;
+    animation-iteration-count: infinite, infinite;
+}
+
+@keyframes snow-fall {
+    0% {
+        transform: translate3d(0, -20px, 0);
+    }
+    100% {
+        transform: translate3d(0, calc(100vh + 30px), 0);
+    }
+}
+
+@keyframes snow-sway {
+    0%, 100% {
+        margin-left: calc(var(--sway, 16px) * -1);
+    }
+    50% {
+        margin-left: var(--sway, 16px);
+    }
+}
+
+/* Уважаем настройку снижения анимации в системе */
+@media (prefers-reduced-motion: reduce) {
+    .snow-layer {
+        display: none;
+    }
+}
